@@ -1,0 +1,78 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CamActivity" >
+
+    <SurfaceView
+        android:id="@+id/surfaceView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <Button
+        android:id="@+id/leftButton"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:onClick="onButtonClick"
+        android:background="@drawable/keypad_left"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="80dp"
+        android:layout_marginLeft="32dp" />
+
+    <Button
+        android:id="@+id/rightButton"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:onClick="onButtonClick"
+        android:background="@drawable/keypad_right"
+        android:layout_alignTop="@id/leftButton"
+        android:layout_toRightOf="@id/leftButton"
+        android:layout_marginLeft="64dp" />
+
+    <Button
+        android:id="@+id/upButton"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:onClick="onButtonClick"
+        android:background="@drawable/keypad_up"
+        android:layout_above="@id/leftButton"
+        android:layout_toRightOf="@id/leftButton"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="16dp" />
+
+
+    <Button
+        android:id="@+id/downButton"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:onClick="onButtonClick"
+        android:background="@drawable/keypad_down"
+        android:layout_below="@id/upButton"
+        android:layout_alignLeft="@id/upButton"
+        android:layout_marginTop="48dp" />
+
+
+    <Button
+        android:id="@+id/aButton"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:onClick="onButtonClick"
+        android:background="@drawable/keypad"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="64dp"
+        android:layout_marginRight="80dp" />
+
+    <Button
+        android:id="@+id/bButton"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:onClick="onButtonClick"
+        android:background="@drawable/keypad"
+        android:layout_above="@id/aButton"
+        android:layout_alignLeft="@id/aButton"
+        android:layout_marginLeft="32dp"
+        android:layout_marginBottom="32dp" />
+
+
+</RelativeLayout>

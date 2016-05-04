@@ -1,0 +1,54 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000" >
+
+    <ImageView
+        android:id="@+id/backgroundImageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/background" />
+
+    <Button
+        android:id="@+id/vehicleButton"
+        android:layout_width="120dp"
+        android:layout_height="160dp"
+        android:background="@drawable/vehicle_button"
+        android:onClick="onVehicleButtonClick"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:id="@+id/camButton"
+        android:layout_width="120dp"
+        android:layout_height="160dp"
+        android:background="@drawable/cam_button"
+        android:onClick="onCamButtonClick"
+        android:layout_toLeftOf="@id/vehicleButton"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="16dp" />
+
+    <Button
+        android:id="@+id/settingsButton"
+        android:layout_width="160dp"
+        android:layout_height="40dp"
+        android:background="@drawable/setting_button"
+        android:onClick="onSettingsButtonClick"
+        android:layout_below="@id/vehicleButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp" />
+
+    <Button
+        android:id="@+id/quadButton"
+        android:layout_width="120dp"
+        android:layout_height="160dp"
+        android:background="@drawable/quad_button"
+        android:onClick="onQuadButtonClick"
+        android:layout_toRightOf="@id/vehicleButton"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="16dp" />
+
+</RelativeLayout>
