@@ -280,6 +280,6 @@ public class RtpSocket implements Runnable {
         if(mThread!=null) mThread.interrupt();
         isStoped = true;
         if(rtspBuffer!=null) rtspBuffer=null;
-        tcpThread.interrupt();
+        if(tcpThread!=null) tcpThread.interrupt();
     }
 }

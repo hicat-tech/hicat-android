@@ -52,7 +52,7 @@ public class RtcpSocket {
                     } catch (IOException e) {
                         Log.e(tag,e.toString());
                     }
-                    Log.e(tag,"Rtcp rev package " + mPacket.toString());
+//                    Log.e(tag,"Rtcp rev package " + mPacket.toString());
                 }
             }
         });

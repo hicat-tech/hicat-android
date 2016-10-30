@@ -2,20 +2,24 @@
 
     <SwitchPreference
         android:defaultValue="true"
-        android:key="hardware_decoding"
-        android:summary="Decoding h.264 video"
-        android:title="Enable hardware decoding" />
+        android:key="player"
+        android:title="Use Android Default Media Player" />
+
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="mannual"
+        android:title="Mannual Settings" />
 
     <!-- NOTE: EditTextPreference accepts EditText attributes. -->
     <!-- NOTE: EditTextPreference's summary should be set to its value by the activity code. -->
     <EditTextPreference
         android:defaultValue="rtsp://192.168.1.1/hicat.264"
-        android:key="rtps_url"
+        android:key="stream_url"
         android:inputType="textUri"
         android:maxLines="1"
         android:selectAllOnFocus="true"
         android:singleLine="true"
-        android:title="RTSP URL" />
+        android:title="Stream URL" />
 
     <EditTextPreference
         android:defaultValue="ws://192.168.1.1:7681"

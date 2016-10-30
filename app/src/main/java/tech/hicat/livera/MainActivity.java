@@ -3,6 +3,7 @@ package tech.hicat.livera;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.preference.PreferenceManager;
@@ -13,6 +14,8 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity {
     public final static String TAG = "Livera Main Activity";
+
+    private boolean use_default_player;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -27,10 +30,18 @@ public class MainActivity extends Activity {
 
             Toast.makeText(this, ("network is not available."), Toast.LENGTH_SHORT).show();
         }
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        use_default_player = preferences.getBoolean("player", true);
     }
 
-    public void onVehicleButtonClick(View view) {
-        Intent intent = new Intent(this, VehicleActivity.class);
+    public void onRobotButtonClick(View view) {
+        Intent intent;
+        if (use_default_player) {
+            intent = new Intent(this, RobotActivity.class);
+        } else {
+            intent = new Intent(this, VehicleActivity.class);
+        }
         startActivity(intent);
     }
 
@@ -44,9 +55,9 @@ public class MainActivity extends Activity {
         startActivity(intent);
     }
 
-    public void onQuadButtonClick(View view) {
-//        Intent intent = new Intent(this, AboutActivity.class);
-//        startActivity(intent);
+    public void onDashboardButtonClick(View view) {
+        Intent intent = new Intent(this, DashboardActivity.class);
+        startActivity(intent);
     }
 
     public boolean isNetworkConnected() {

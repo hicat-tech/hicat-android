@@ -10,7 +10,7 @@ import android.view.SurfaceView;
 import android.view.View;
 
 import com.aaronhan.rtspclient.RtspClient;
-import com.codebutler.android_websockets.WebSocketClient;
+import com.erz.joysticklibrary.JoyStick;
 import com.neovisionaries.ws.client.WebSocket;
 import com.neovisionaries.ws.client.WebSocketAdapter;
 import com.neovisionaries.ws.client.WebSocketFactory;
@@ -31,6 +31,8 @@ public class VehicleActivity extends Activity {
     private SurfaceView mSurfaceView;
     private RtspClient mRtspClient;
     private WebSocket mWebsocket;
+    private long mLeftPower;
+    private long mRightPower;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,11 +41,55 @@ public class VehicleActivity extends Activity {
         setContentView(R.layout.activity_vehicle);
         mSurfaceView = (SurfaceView)findViewById(R.id.surfaceView);
 
+        JoyStick joyStick = (JoyStick) findViewById(R.id.joyStick);
+        joyStick.setListener(new JoyStick.JoyStickListener() {
+            @Override
+            public void onMove(JoyStick joyStick, double angle, double power) {
+                long left = 0;
+                long right = 0;
+
+                power = power * 255 / 100;
+
+                if (angle > Math.PI / 2.0) {
+                    right = Math.round(power);
+                    left = Math.round(power - power * 2 * Math.sin(angle - Math.PI / 2.0));
+                } else if (angle > 0) {
+                    left = Math.round(power);
+                    right = Math.round(power - power * 2 * Math.cos(angle));
+                } else if (angle > -Math.PI / 2.0) {
+                    right = -Math.round(power);
+                    left = Math.round(power + power * 2 * Math.sin(angle));
+                } else {
+                    left = -Math.round(power);
+                    right = Math.round(power - power * 2 * Math.cos(angle + Math.PI / 2.0));
+                }
+
+                if ((left != 0) && (right != 0)) {
+                    if (Math.abs(left - mLeftPower) < 10 && Math.abs(right - mRightPower) < 10) {
+                        return;
+                    }
+                }
+
+                Log.v(TAG, "power:" + power + ", angle:" + angle);
+
+                mLeftPower = left;
+                mRightPower = right;
+
+                String msg = "motor " + right + " " + left + "\n";
+                if (mWebsocket.isOpen()) {
+                    mWebsocket.sendText(msg);
+                } else {
+//                    mWebsocket.connectAsynchronously();
+                }
+
+                Log.v(TAG, msg);
+            }
+        });
+
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-//        String ip = preferences.getString("ip", "192.168.1.1");
-        String rtspUrl = preferences.getString("rtsp_url", "rtsp://192.168.1.1/hicat.264");
-        String websocketUrl = preferences.getString("rtsp_url", "ws://192.168.1.1:7681");
-        boolean hardware_decoding = preferences.getBoolean("hardware_decoding", true);
+        String rtspUrl = preferences.getString("stream_url", "rtsp://192.168.1.1/hicat.264");
+        String websocketUrl = preferences.getString("websocket_url", "ws://192.168.1.1:7681");
+        boolean mannul = preferences.getBoolean("mannul", false);
 
         mRtspClient = new RtspClient(rtspUrl);
         mRtspClient.setSurfaceView(mSurfaceView);
@@ -95,8 +141,25 @@ public class VehicleActivity extends Activity {
     }
 
     public void onButtonClick(View view) {
+        String msg = "unknown\n";
+        switch (view.getId()) {
+            case R.id.aButton:
+                msg = "camera down\n";
+                break;
+            case R.id.bButton:
+                msg = "camera up\n";
+                break;
+            case R.id.cButton:
+                msg = "laser\n";
+                break;
+            default:
+                Log.v(TAG, "Unknown button is clicked");
+        }
+
         if (mWebsocket.isOpen()) {
-            mWebsocket.sendText("ping\n");
+            mWebsocket.sendText(msg);
+        } else {
+//            mWebsocket.connectAsynchronously();
         }
     }
 

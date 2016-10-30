@@ -13,11 +13,11 @@
         android:src="@drawable/background" />
 
     <Button
-        android:id="@+id/vehicleButton"
+        android:id="@+id/robotButton"
         android:layout_width="120dp"
         android:layout_height="160dp"
-        android:background="@drawable/vehicle_button"
-        android:onClick="onVehicleButtonClick"
+        android:background="@drawable/robot"
+        android:onClick="onRobotButtonClick"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
@@ -25,9 +25,9 @@
         android:id="@+id/camButton"
         android:layout_width="120dp"
         android:layout_height="160dp"
-        android:background="@drawable/cam_button"
+        android:background="@drawable/camera"
         android:onClick="onCamButtonClick"
-        android:layout_toLeftOf="@id/vehicleButton"
+        android:layout_toLeftOf="@id/robotButton"
         android:layout_centerVertical="true"
         android:layout_marginRight="16dp" />
 
@@ -35,19 +35,19 @@
         android:id="@+id/settingsButton"
         android:layout_width="160dp"
         android:layout_height="40dp"
-        android:background="@drawable/setting_button"
+        android:background="@drawable/setting"
         android:onClick="onSettingsButtonClick"
-        android:layout_below="@id/vehicleButton"
+        android:layout_below="@id/robotButton"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="24dp" />
 
     <Button
-        android:id="@+id/quadButton"
+        android:id="@+id/dashboardButton"
         android:layout_width="120dp"
         android:layout_height="160dp"
-        android:background="@drawable/quad_button"
-        android:onClick="onQuadButtonClick"
-        android:layout_toRightOf="@id/vehicleButton"
+        android:background="@drawable/dashboard"
+        android:onClick="onDashboardButtonClick"
+        android:layout_toRightOf="@id/robotButton"
         android:layout_centerVertical="true"
         android:layout_marginLeft="16dp" />
 
